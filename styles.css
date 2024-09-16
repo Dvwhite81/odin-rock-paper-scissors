@@ -1,3 +1,71 @@
+:root {
+  --light-purple: rgb(150, 150, 230);
+  --dark-purple: rgb(50, 50, 90);
+}
+
 body {
-  background-color: blue;
+  background-color: var(--light-purple);
+  color: var(--dark-purple);
+  padding: 0 1rem;
+  text-align: center;
+}
+
+#buttons {
+  align-items: center;
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  margin-top: 5rem;
+}
+
+button {
+  background-color: var(--dark-purple);
+  border: 3px solid var(--light-purple);
+  border-radius: 10px;
+  color: var(--light-purple);
+  cursor: pointer;
+  font-size: larger;
+  font-weight: bold;
+  padding: 8px 16px;
+}
+
+button:hover {
+  background-color: var(--light-purple);
+  color: var(--dark-purple);
+}
+
+#scoreboard {
+  display: flex;
+  justify-content: space-between;
+}
+
+#scoreboard h2 {
+  text-decoration: underline;
+}
+
+#humanScore,
+#computerScore {
+  font-size: xx-large;
+  font-weight: bold;
+}
+
+#message {
+  margin: 5rem auto;
+  text-align: center;
+  width: 80%;
+}
+
+#modal {
+  background-color: var(--dark-purple);
+  border-radius: 10px;
+  color: var(--light-purple);
+  left: 50%;
+  padding: 4rem;
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.hidden {
+  display: none;
 }

@@ -1,16 +1,23 @@
+// Choices
 type Choice = 'rock' | 'paper' | 'scissors';
-
 const CHOICES: Choice[] = ['rock', 'paper', 'scissors'];
-
+// Variables
 let humanScore = 0;
 let computerScore = 0;
-let roundsPlayed = 0;
+
+// Elements
+const spanHumanScore = document.getElementById('humanScore');
+const spanMessage = document.getElementById('message');
+const spanComputerScore = document.getElementById('computerScore');
+const modal = document.getElementById('modal');
+const modalMessage = document.getElementById('modal-message');
 
 const getComputerChoice = () => {
   const index = Math.floor(Math.random() * 3);
   return CHOICES[index];
 };
 
+/*
 const isValidChoice = (choice: string) => {
   if (choice === 'rock' || choice === 'paper' || choice === 'scissors') {
     return true;
@@ -18,6 +25,7 @@ const isValidChoice = (choice: string) => {
     return false;
   }
 };
+
 
 const getHumanChoice = () => {
   const choice = prompt(
@@ -32,8 +40,15 @@ const getHumanChoice = () => {
     return getHumanChoice();
   }
 };
+*/
 
-const getRoundWinner = (humanChoice: string, computerChoice: Choice) => {
+const updateScoreboard = (result: string) => {
+  spanHumanScore.textContent = humanScore.toString();
+  spanComputerScore.textContent = computerScore.toString();
+  spanMessage.textContent = result;
+};
+
+const getRoundWinner = (humanChoice: Choice, computerChoice: Choice) => {
   let result: string;
 
   if (
@@ -54,15 +69,13 @@ const getRoundWinner = (humanChoice: string, computerChoice: Choice) => {
     result = `It's a tie!`;
   }
 
-  return result;
+  updateScoreboard(result);
 };
 
-const playRound = () => {
-  const humanChoice = getHumanChoice();
+const playRound = (humanChoice: Choice) => {
   const computerChoice = getComputerChoice();
-  const roundWinner = getRoundWinner(humanChoice, computerChoice);
-  console.log('ROUND WINNER:', roundWinner);
-  roundsPlayed++;
+  getRoundWinner(humanChoice, computerChoice);
+  checkEndGame();
 };
 
 const getGameWinner = () => {
@@ -75,12 +88,32 @@ const getGameWinner = () => {
   }
 };
 
+const gameIsOver = () => humanScore === 5 || computerScore === 5;
+
+const showModal = (winner: string) => {
+  modal.classList.toggle('hidden');
+  modalMessage.textContent = winner;
+};
+
+const checkEndGame = () => {
+  if (gameIsOver()) {
+    const winner = getGameWinner();
+    showModal(winner);
+  }
+};
+
 const resetGame = () => {
   humanScore = 0;
   computerScore = 0;
-  roundsPlayed = 0;
+
+  spanHumanScore.textContent = humanScore.toString();
+  spanComputerScore.textContent = computerScore.toString();
+  spanMessage.textContent = 'Click a button to play!';
+  modalMessage.textContent = '';
+  modal.classList.toggle('hidden');
 };
 
+/*
 const playGame = () => {
   for (let i = 0; i < 5; i++) {
     playRound();
@@ -95,3 +128,4 @@ const playGame = () => {
 };
 
 playGame();
+*/
